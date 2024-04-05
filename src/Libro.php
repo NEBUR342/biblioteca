@@ -66,16 +66,16 @@ class Libro extends Conexion{
 
     //Funcion la cual me muestra los datos de un libro
     public function read(){
-    parent::crearConexion();
-    $q = "Select * from libros where id_libro=:i";
-    $stmt = parent::$conexion->prepare($q);
-    try{
-        $stmt->execute([':i'=>$this->id_libro]);
-    }catch(PDOException $ex){
-        die("Error en readAll libros".$ex->getMessage());
-    }
-    parent::$conexion=null;
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
+        parent::crearConexion();
+        $q = "Select * from libros where id_libro=:i";
+        $stmt = parent::$conexion->prepare($q);
+        try{
+            $stmt->execute([':i'=>$this->id_libro]);
+        }catch(PDOException $ex){
+            die("Error en read libros".$ex->getMessage());
+        }
+        parent::$conexion=null;
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     //Funcion la cual me muestra los datos de todos los libros
@@ -87,14 +87,14 @@ class Libro extends Conexion{
             $stmt->execute();
 
         }catch(PDOException $ex){
-            die("Error en read Libro".$ex->getMessage());
+            die("Error en readAll Libro".$ex->getMessage());
         }
         parent::$conexion=null;
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
 //------------------------------------OTROS METODOS------------------------------------
-    private  function HayLibro(){
+    private function HayLibro(){
         $q = "Select id_libro from libros";
         $stmt = parent::$conexion->prepare($q);
         try{
